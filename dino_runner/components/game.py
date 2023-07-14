@@ -27,6 +27,7 @@ class Game:
         pygame.quit()
 
     def events(self):
+        self.handle_input()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.playing = False
@@ -38,6 +39,7 @@ class Game:
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
+        self.dino.update()
         self.screen.blit(self.dino.image, self.dino.rect)
         pygame.display.update()
         pygame.display.flip()
@@ -50,3 +52,9 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+
+    def handle_input(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            if not self.dino.is_jumping:
+                self.dino.is_jumping = True

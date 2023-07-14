@@ -11,11 +11,11 @@ class Dinosaur(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.GROUND_LEVEL = 310
 		self.is_jumping = False
+		self.is_falling = False
 		self.jump_velocity = 10
-		self.gravity = 0.5
+		self.gravity = 3
 		self.y_velocity = 0
-		self.jump_height = 100
-		self.initial_y = self.rect.y
+		self.jump_height = 150
 
 		self.rect.x = 100
 		self.rect.y = 310
@@ -27,4 +27,20 @@ class Dinosaur(pygame.sprite.Sprite):
 			self.index = 0
 		self.image = self.images[self.index]
 
-	# TODO: Jump
+		# Jumping
+		if self.is_jumping:
+			if self.rect.top >= self.jump_height and not self.is_falling:
+				self.y_velocity += self.gravity
+				self.rect.y -= self.y_velocity
+				if self.rect.y <= self.jump_height:
+					self.is_falling = True
+					self.y_velocity = 0
+			else:
+				if self.is_falling:
+					self.y_velocity += self.gravity
+					self.rect.y += self.y_velocity
+					if self.rect.y >= self.GROUND_LEVEL:
+						self.rect.y = self.GROUND_LEVEL
+						self.is_jumping = False
+						self.is_falling = False
+						self.y_velocity = 0

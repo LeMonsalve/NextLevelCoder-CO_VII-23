@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.components.cloud import Cloud
+from dino_runner.components.objects.cloud import Cloud
 
 
 class CloudsManager:

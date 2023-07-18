@@ -1,10 +1,11 @@
-import random
-
 import pygame
 
-from dino_runner.components.clouds_manager import CloudsManager
-from dino_runner.components.dinosaur import Dinosaur
-from dino_runner.components.obstacle_manager import ObstacleManager
+from dino_runner.components.enemies.blocks.block_manager import BlocksManager
+from dino_runner.components.enemies.bombs.bombs_manager import BombsManager
+from dino_runner.components.enemies.spikes.spikes_manager import SpikesManager
+from dino_runner.components.objects.clouds_manager import CloudsManager
+from dino_runner.components.player import Player
+from dino_runner.components.enemies.birds.birds_manager import BirdsManager
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 
 
@@ -20,12 +21,17 @@ class Game:
 		self.playing = False
 		self.game_speed = 20
 		self.x_pos_bg = 0
-		self.y_pos_bg = 380
+		self.y_pos_bg = 390
 		self.score = 0
 		self.high_score = self.load_high_score()
-		self.dino = Dinosaur()
-		self.obstacle_manager = ObstacleManager()
+		self.player = Player()
 		self.clouds_manager = CloudsManager()
+
+		# Enemies Managers
+		self.blocks_manager = BlocksManager()
+		self.bombs_manager = BombsManager(30)
+		self.birds_manager = BirdsManager(60)
+		self.spikes_manager = SpikesManager(90)
 
 	def run(self):
 		# Game loop: events - update - draw
@@ -45,16 +51,22 @@ class Game:
 	def update(self):
 		self.game_speed += 0.001
 		self.score += 0.05
-		self.dino.update(pygame.key.get_pressed())
-		self.obstacle_manager.update(self.dino, self)
+		self.player.update(pygame.key.get_pressed())
+		self.blocks_manager.update(self)
+		self.birds_manager.update(self)
+		self.bombs_manager.update(self)
+		self.spikes_manager.update(self)
 		self.clouds_manager.update()
 
 	def draw(self):
 		self.clock.tick(FPS)
 		self.screen.fill((255, 255, 255))
 		self.draw_background()
-		self.dino.draw(self.screen)
-		self.obstacle_manager.draw(self.screen)
+		self.player.draw(self.screen)
+		self.blocks_manager.draw(self.screen)
+		self.birds_manager.draw(self.screen)
+		self.bombs_manager.draw(self.screen)
+		self.spikes_manager.draw(self.screen)
 		self.clouds_manager.draw(self.screen)
 		self.draw_score()
 		self.draw_high_score()

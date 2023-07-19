@@ -6,6 +6,7 @@ from dino_runner.components.enemies.spikes.spikes_manager import SpikesManager
 from dino_runner.components.objects.clouds_manager import CloudsManager
 from dino_runner.components.player import Player
 from dino_runner.components.enemies.birds.birds_manager import BirdsManager
+from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 
 
@@ -28,10 +29,13 @@ class Game:
 		self.clouds_manager = CloudsManager()
 
 		# Enemies Managers
-		self.blocks_manager = BlocksManager()
-		self.bombs_manager = BombsManager(30)
-		self.birds_manager = BirdsManager(60)
-		self.spikes_manager = SpikesManager(90)
+		self.blocks_manager = BlocksManager(0)
+		self.bombs_manager = BombsManager(150)
+		self.birds_manager = BirdsManager(50)
+		self.spikes_manager = SpikesManager(80)
+
+		# Power Ups Manager
+		self.power_up_manager = PowerUpManager()
 
 	def run(self):
 		# Game loop: events - update - draw
@@ -52,6 +56,7 @@ class Game:
 		self.game_speed += 0.001
 		self.score += 0.05
 		self.player.update(pygame.key.get_pressed())
+		self.power_up_manager.update(self)
 		self.blocks_manager.update(self)
 		self.birds_manager.update(self)
 		self.bombs_manager.update(self)
@@ -64,6 +69,7 @@ class Game:
 		self.draw_background()
 		self.player.draw(self.screen)
 		self.blocks_manager.draw(self.screen)
+		self.power_up_manager.draw(self.screen)
 		self.birds_manager.draw(self.screen)
 		self.bombs_manager.draw(self.screen)
 		self.spikes_manager.draw(self.screen)

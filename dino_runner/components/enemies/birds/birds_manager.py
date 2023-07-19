@@ -7,7 +7,7 @@ from dino_runner.utils.constants import SCREEN_WIDTH, BIRD
 
 
 class BirdsManager:
-	def __init__(self, score_to_start: int):
+	def __init__(self, score_to_start: int = 0):
 		self.birds = pygame.sprite.Group()
 		self.score_to_start = score_to_start
 

@@ -25,6 +25,8 @@ class Player(pygame.sprite.Sprite):
 		self.y_velocity = 0
 		self.jump_height = 100
 
+		self.is_invincible = False
+
 		self.rect.x = self.RECT_X
 		self.rect.y = self.REXT_Y
 

@@ -1,12 +1,12 @@
 import pygame.sprite
+
+from dino_runner.components.enemies.enemy import Enemy
 from dino_runner.utils.constants import BLOCK
 
 
-class Block(pygame.sprite.Sprite):
+class Block(Enemy):
 	def __init__(self, x: int, velocity: int):
-		super().__init__()
-		self.image = BLOCK[0]
-		self.rect = self.image.get_rect()
+		super().__init__(BLOCK[0])
 		self.rect.inflate_ip(-10, -10)
 		self.rect.x = x
 		self.rect.y = 345
@@ -22,8 +22,3 @@ class Block(pygame.sprite.Sprite):
 		self.step_index += 1
 		if self.step_index >= 10:
 			self.step_index = 0
-
-	def check_collision(self, player):
-		player_rect = player.rect.copy()
-		player_rect.inflate_ip(-20, -20)
-		return self.rect.colliderect(player_rect)

@@ -1,11 +1,12 @@
 import pygame.sprite
 
+from dino_runner.components.enemies.enemy import Enemy
 
-class Bird(pygame.sprite.Sprite):
+
+class Bird(Enemy):
 	def __init__(self, images, x: int, y: int, velocity: int):
-		super().__init__()
 		self.images = images
-		self.image = images[0]
+		super().__init__(images[0])
 		self.rect = self.image.get_rect()
 		self.rect.inflate_ip(-15, -10)
 		self.rect.x = x
@@ -25,11 +26,6 @@ class Bird(pygame.sprite.Sprite):
 			self.image = self.images[1]
 		else:
 			self.image = self.images[0]
-
-	def check_collision(self, player):
-		player_rect = player.rect.copy()
-		player_rect.inflate_ip(-30, -30)
-		return self.rect.colliderect(player_rect)
 
 	def handle_step_index(self):
 		self.step_index += 1

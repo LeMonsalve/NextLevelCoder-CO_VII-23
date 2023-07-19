@@ -1,16 +1,15 @@
 import pygame.sprite
 
+from dino_runner.components.enemies.enemy import Enemy
 from dino_runner.utils.constants import SPIKES
 
 
-class Spike(pygame.sprite.Sprite):
+class Spike(Enemy):
 	JUMP_VELOCITY = 13
 	INITIAL_Y = 550
 
 	def __init__(self, x: int, velocity):
-		super().__init__()
-		self.image = SPIKES[0]
-		self.rect = self.image.get_rect()
+		super().__init__(SPIKES[0])
 		self.rect.inflate_ip(-20, -20)
 		self.rect.x = x
 		self.rect.y = self.INITIAL_Y
@@ -30,11 +29,6 @@ class Spike(pygame.sprite.Sprite):
 		self.step_index += 1
 		if self.step_index >= 10:
 			self.step_index = 0
-
-	def check_collision(self, player):
-		player_rect = player.rect.copy()
-		player_rect.inflate_ip(-20, -20)
-		return self.rect.colliderect(player_rect)
 
 	def jump(self):
 		self.rect.y -= self.jump_velocity * 4

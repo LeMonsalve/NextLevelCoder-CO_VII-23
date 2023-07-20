@@ -28,7 +28,7 @@ class Game:
 		self.game_speed = 20
 		self.x_pos_bg = 0
 		self.y_pos_bg = 390
-		self.score = 95
+		self.score = 0
 		self.high_score = self.load_high_score()
 		self.game_over = False
 

@@ -33,10 +33,14 @@ class SpikesManager:
 		for spike in self.spikes:
 			has_collisioned = spike.check_collision(game.player)
 			if has_collisioned:
-				game.playing = False
+				game.game_over = True
 				break
 
 	def handle_step_index(self):
 		self.step_index += 1
 		if self.step_index >= self.time_to_create:
 			self.step_index = 0
+
+	def reset(self):
+		self.spikes.empty()
+		self.step_index = 0

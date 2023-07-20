@@ -42,5 +42,9 @@ class BirdsManager:
 		for bird in self.birds:
 			has_collisioned = bird.check_collision(player)
 			if has_collisioned:
-				game.playing = False
+				game.game_over = True
 				break
+
+	def reset(self):
+		self.birds.empty()
+

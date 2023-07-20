@@ -26,7 +26,7 @@ class BlocksManager:
 		for block in self.blocks:
 			has_collisioned = block.check_collision(game.player)
 			if has_collisioned:
-				game.playing = False
+				game.game_over = True
 				break
 
 	def handle_step_index(self):
@@ -37,3 +37,7 @@ class BlocksManager:
 	def create_block(self, game):
 		block = Block(SCREEN_WIDTH + 10, game.game_speed * -1)
 		self.blocks.add(block)
+
+	def reset(self):
+		self.blocks.empty()
+		self.step_index = 0

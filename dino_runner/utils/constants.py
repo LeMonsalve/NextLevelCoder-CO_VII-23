@@ -8,6 +8,7 @@ SCREEN_WIDTH = 1100
 FPS = 30
 IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 NEWER_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "Newer")
+MUSIC_DIR = os.path.join(os.path.dirname(__file__), "..", "sounds")
 
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
@@ -91,5 +92,15 @@ BLOCK = [
 	pygame.image.load(os.path.join(NEWER_DIR, 'Characters/Enemies/block_0.png')),
 	pygame.image.load(os.path.join(NEWER_DIR, 'Characters/Enemies/block_1.png')),
 ]
+
+SNOW = pygame.image.load(os.path.join(NEWER_DIR, 'snow_body.png'))
+
+LM_SHIELD = pygame.image.load(os.path.join(NEWER_DIR, 'shield.png'))
+
+BACKGROUND_MUSIC = os.path.join(MUSIC_DIR, 'background.wav')
+POWER_UP_SOUND = os.path.join(MUSIC_DIR, 'power_up.wav')
+DEATH_SOUND = os.path.join(MUSIC_DIR, 'death.mp3')
+JUMP_SOUND = os.path.join(MUSIC_DIR, 'jump.mp3')
+BOMB_SOUND = os.path.join(MUSIC_DIR, 'bomb.mp3')
 
 DEFAULT_TYPE = "default"
